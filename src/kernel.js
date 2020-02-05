@@ -161,45 +161,19 @@ var component = kernel.createComponent = function(theFunction){
   lifecycle['shouldRerender'] = renderMethods['shouldRerender'];
 
   let getInitialState = function(){
-    let name = 'initial';
-    if(lifecycle[name] !== null){
-      if(typeof lifecycle[name] === 'object'){
-        lifecycle[name] = lifecycle[name][name];
-      }
-      return lifecycle[name](this);
-    }else{
-      throw('require initial callback for stateful component');
-    }
+    return kernel.setLifecycle('initial', lifecycle, this);
   };
 
   let componentDidMount = function(){   
-    let name = 'mounted';
-    if(lifecycle[name] !== null){
-      if(typeof lifecycle[name] === 'object'){
-        lifecycle[name] = lifecycle[name][name];
-      }
-      return lifecycle[name](this);
-    }
+    kernel.setLifecycle('mounted', lifecycle, this);
   };
 
   let componentDidUpdate = function(){   
-    let name = 'updated';
-    if(lifecycle[name] !== null){
-      if(typeof lifecycle[name] === 'object'){
-        lifecycle[name] = lifecycle[name][name];
-      }
-      return lifecycle[name](this);
-    }
+    kernel.setLifecycle('updated', lifecycle, this);
   };
 
   let componentWillUnmount = function(){  
-    let name = 'beforeUnmount';
-    if(lifecycle[name] !== null){
-      if(typeof lifecycle[name] === 'object'){
-        lifecycle[name] = lifecycle[name][name];
-      }
-      return lifecycle[name](this);
-    }
+    kernel.setLifecycle('beforeUnmount', lifecycle, this);
   };
 
   let shouldComponentUpdate = function(nextProps, nextState){
@@ -227,6 +201,18 @@ var component = kernel.createComponent = function(theFunction){
     shouldComponentUpdate: shouldComponentUpdate,
     render: render
   });
+};
+
+kernel.setLifecycle = function(name, lifecycle, _this){
+  if(lifecycle[name] !== null){
+    if(typeof lifecycle[name] === 'object'){
+      lifecycle[name] = lifecycle[name][name];
+    }
+    return lifecycle[name](_this);
+  }
+  if(name==='initial'){
+    throw('require initial callback for stateful component');
+  }
 };
 
 kernel.getRenderMethods = function(renderPackage){
