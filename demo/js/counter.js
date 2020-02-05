@@ -37,8 +37,8 @@ var CounterElements = {
   buttonList: element(ButtonList, function(data, $$){
     return {
       count: data.state['count'], 
-      onClickIncrease: function(e){ $$.handleClickIncrease(data, e) },
-      onClickDecrease: function(e){ $$.handleClickDecrease(data, e) } 
+      onClickIncrease: delegate($$.handleClickIncrease)(data),
+      onClickDecrease: delegate($$.handleClickDecrease)(data) 
     };
   })
 };

@@ -33,7 +33,7 @@ let ListElements = {
       'class'  : 'item _'+item, 
       'key'    : item, 
       'data-id': item, 
-      'onClick': function(e){ $$.handleItemClick(data, e) }
+      'onClick': delegate($$.handleItemClick)(data)
     };
   })
 };
@@ -46,7 +46,6 @@ let ListEvents = {
       let newData = state.items.filter(function(item){ 
         return item !== toDelete 
       });
-      console.log(newData);
       return { items: newData };
     });
   }

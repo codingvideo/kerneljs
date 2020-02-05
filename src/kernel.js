@@ -43,6 +43,19 @@ var rootElement = function(mainComponent, props){
   )
 };
 
+var delegate = function(target){
+  return function(){ // args
+    let args = [];
+    for(let i=0; i<arguments.length; i++){
+      args[i] = arguments[i];
+    }
+    return function($event){ // event handler
+      args.push($event);
+      target.apply(this, args);
+    }
+  };
+};
+
 kernel.validateAttributeType = function(attr, key, type){
   if(attr !== undefined){
     if(attr['style'] !== undefined){

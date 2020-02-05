@@ -24,7 +24,7 @@ var ItemCounterElements = {
   span: element('span', function(data, $$){ 
     return {
       style: { color:'red' }, 
-      onClick: function(e){ $$.handleClick(data, e); } 
+      onClick: delegate($$.handleClick)(data) 
     };
   })
 };
