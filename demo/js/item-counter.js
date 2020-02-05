@@ -4,13 +4,13 @@ function ItemCounter(initial, updated, mounted, beforeUnmount){
     return { count: data.props.startCount };
   });
 
-  let $  = ItemCounterElements;
+  let __ = ItemCounterElements;
   let $$ = ItemCounterEvents;
   
   function render(data){
     
     return (
-      $.span(data, $$)(
+      __.span(data, $$)(
         data.state.count
       )
     );

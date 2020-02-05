@@ -6,14 +6,14 @@ function List(initial){
 
   let render = function(data){
     
-    let $ = ListElements;
+    let __= ListElements;
     let $$= ListEvents;
     let items = data.state.items;
     
     return (
       element('ul')(
         items.map(function(item){return(
-          $.li(data, item, $$)(
+          __.li(data, item, $$)(
             element(ItemCounter, { startCount: item })(
               null
             )

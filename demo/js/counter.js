@@ -4,7 +4,7 @@ function Counter(initial){
     return { count: data.props.startAt };
   });
 
-  let $ = CounterElements;
+  let __= CounterElements;
   let $$= CounterEvents;
   
   function render(data){
@@ -13,10 +13,10 @@ function Counter(initial){
         element("h1", { class: "heading" })(
           "hello"
         ),
-        $.count(data, $$)(
+        __.count(data, $$)(
           data.state['count']
         ),
-        $.buttonList(data, $$)(
+        __.buttonList(data, $$)(
           null
         )
       )
