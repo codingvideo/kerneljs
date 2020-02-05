@@ -1,6 +1,9 @@
 var kernel = {};
 
 var element = function(type, attr){
+
+  kernel.validateAttributeType(attr, 'style', 'object');
+
   if(typeof attr === 'function'){ 
     return function(){ // params
       let _attr = attr.apply(null, arguments); 
@@ -29,6 +32,16 @@ var rootElement = function(mainComponent, props){
     kernel.createElement(mainComponent, props), 
     document.getElementById('root')
   )
+};
+
+kernel.validateAttributeType = function(attr, key, type){
+  if(attr !== undefined){
+    if(attr['style'] !== undefined){
+      if(typeof attr[key] !== type){
+        throw('The '+key+' attribute has to be type '+type+'.');
+      }
+    }
+  }
 };
 
 kernel.createElement = function(){ 
