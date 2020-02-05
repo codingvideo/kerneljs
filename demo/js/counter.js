@@ -9,12 +9,14 @@ function Counter(initial){
   
   function render(data){
     return (
-      $.div_1(
-        $.h1("hello"),
-        $.div_2(data, $$)(
+      element('div')(
+        element("h1", { class: "heading" })(
+          "hello"
+        ),
+        $.count(data, $$)(
           data.state['count']
         ),
-        $.button_list(data, $$)(
+        $.buttonList(data, $$)(
           null
         )
       )
@@ -25,24 +27,20 @@ function Counter(initial){
 }
 
 var CounterElements = {
-
-  div_1: element('div'),
   
-  div_2: element('div', function(data, $$){
+  count: element('div', function(data, $$){
     return { 
       onClick: function(e){ $$.handleClickIncrease(data, e) } 
     };
   }),
 
-  button_list: element(ButtonList, function(data, $$){
+  buttonList: element(ButtonList, function(data, $$){
     return {
       count: data.state['count'], 
       onClickIncrease: function(e){ $$.handleClickIncrease(data, e) },
       onClickDecrease: function(e){ $$.handleClickDecrease(data, e) } 
     };
-  }),
-
-  h1: element("h1", { className: "heading" })
+  })
 };
 
 var CounterEvents = {

@@ -11,10 +11,10 @@ function List(initial){
     let items = data.state.items;
     
     return (
-      $.ul(
+      element('ul')(
         items.map(function(item){return(
           $.li(data, item, $$)(
-            $.item_counter(item)(
+            element(ItemCounter, { startCount: item })(
               null
             )
           )
@@ -28,8 +28,6 @@ function List(initial){
 
 let ListElements = {
 
-  ul: element('ul'),
-
   li: element('li', function(data, item, $$){
     return { 
       'class'  : 'item _'+item, 
@@ -37,10 +35,6 @@ let ListElements = {
       'data-id': item, 
       'onClick': function(e){ $$.handleItemClick(data, e) }
     };
-  }),
-
-  item_counter: element(ItemCounter, function(item){ 
-    return { startCount: item };
   })
 };
 
@@ -56,4 +50,4 @@ let ListEvents = {
       return { items: newData };
     });
   }
-}
+};
