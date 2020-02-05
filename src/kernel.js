@@ -161,28 +161,44 @@ var component = kernel.createComponent = function(theFunction){
   lifecycle['shouldRerender'] = renderMethods['shouldRerender'];
 
   let getInitialState = function(){
-    if(lifecycle['initial'] !== null){
-      return lifecycle['initial'](this);
+    let name = 'initial';
+    if(lifecycle[name] !== null){
+      if(typeof lifecycle[name] === 'object'){
+        lifecycle[name] = lifecycle[name][name];
+      }
+      return lifecycle[name](this);
     }else{
       throw('require initial callback for stateful component');
     }
   };
 
   let componentDidMount = function(){   
-    if(lifecycle['mounted'] !== null){
-      lifecycle['mounted'](this);
+    let name = 'mounted';
+    if(lifecycle[name] !== null){
+      if(typeof lifecycle[name] === 'object'){
+        lifecycle[name] = lifecycle[name][name];
+      }
+      return lifecycle[name](this);
     }
   };
 
-  let componentDidUpdate = function(){    
-    if(lifecycle['updated'] !== null){
-      lifecycle['updated'](this);
+  let componentDidUpdate = function(){   
+    let name = 'updated';
+    if(lifecycle[name] !== null){
+      if(typeof lifecycle[name] === 'object'){
+        lifecycle[name] = lifecycle[name][name];
+      }
+      return lifecycle[name](this);
     }
   };
 
-  let componentWillUnmount = function(){    
-    if(lifecycle['beforeUnmount'] !== null){
-      lifecycle['beforeUnmount'](this);
+  let componentWillUnmount = function(){  
+    let name = 'beforeUnmount';
+    if(lifecycle[name] !== null){
+      if(typeof lifecycle[name] === 'object'){
+        lifecycle[name] = lifecycle[name][name];
+      }
+      return lifecycle[name](this);
     }
   };
 
