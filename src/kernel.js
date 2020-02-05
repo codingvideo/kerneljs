@@ -27,6 +27,15 @@ var element = function(type, attr){
   }
 };
 
+var nullUnless = function(cond, callback){
+  if(cond){
+    return callback();
+  }
+  else{
+    return null;
+  }
+};
+
 var rootElement = function(mainComponent, props){
   ReactDOM.render(
     kernel.createElement(mainComponent, props), 
